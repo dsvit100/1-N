@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<form action="" method="POST">
+    {% csrf_token %}
+    {{form}}
+    <!-- views.py의 context 안에 있는 value 값의 form -->
+    <input type="submit">
+
+</form>
+{% endblock%}
