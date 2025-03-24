@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+<!-- 각 데이터들을 쪼개서 출력할 것이기 때문에 반복문 -->
+ {% block body %}
+    {% for article in articles %}
+        <h3>{{article.title}}</h3>
+        <a href="{% url 'articles:detail' article.id %}">detail</a>
+    {% endfor %}
+{% endblock %}
