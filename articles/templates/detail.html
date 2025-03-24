@@ -17,4 +17,12 @@
     <input type="submit">
 
 </form>
+
+<hr>
+
+{% for comment in article.comment_set.all %}
+    <li>{{comment.content}}</li>
+<!-- article들이 가지고 있는 자식 컨텐츠를 모두 가져옴 -->
+{% endfor %}
+
 {% endblock %}
