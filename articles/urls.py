@@ -16,4 +16,10 @@ urlpatterns = [
 
     # Delete
     path('<int:id>/delete/', views.delete, name='delete'),
+
+
+    # Comment
+    # Create
+    # int:article_id = 변수의 이름을 지정해 주는 것, 값을 가져오는 것이 아님
+    path('<int:article_id>/comments/create/', views.comment_create, name='comment_create'),
 ]

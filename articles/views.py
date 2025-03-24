@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import ArticleForm
+from .forms import ArticleForm, CommentForm
 from .models import Article
 
 # Create your views here.
@@ -33,8 +33,10 @@ def index(request):
 
 def detail(request, id):
     article = Article.objects.get(id=id)
+    form = CommentForm()
     context = {
-        'article': article
+        'article': article,
+        'form': form,
     }
     return render(request, 'detail.html', context)
 
@@ -61,3 +63,18 @@ def delete(request, id):
     article = Article.objects.get(id=id)
     article.delete()
     return redirect('articles:index')
+
+
+def comment_create(request, article_id):
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False) # 기본값은 True, 저장하지말고 일단 대기해봐
+
+            article = Article.objects.get(id=article_id) ## 여기서부터
+            comment.article = article
+            comment.save() ## 여기까지 뭔소린지 다시 확인해...
+
+            return redirect('articles:detail', id=article_id)
+    else:
+        return redirect('articles:index') # 처리할 것 없으니까 인덱스로 가아아아ㅏ아ㅏ
