@@ -22,4 +22,7 @@ urlpatterns = [
     # Create
     # int:article_id = 변수의 이름을 지정해 주는 것, 값을 가져오는 것이 아님
     path('<int:article_id>/comments/create/', views.comment_create, name='comment_create'),
+
+    # Delete
+    path('<int:article_id>/comments/<int:id>/delete', views.comment_delete, name='comment_delete'),
 ]
