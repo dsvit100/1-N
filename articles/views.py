@@ -37,3 +37,21 @@ def detail(request, id):
         'article': article
     }
     return render(request, 'detail.html', context)
+
+
+def update(request, id):
+    article = Article.objects.get(id=id)
+    if request.method == 'POST':
+        form = ArticleForm(request.POST, instance=article) # 앞은 새로운 정보, 뒤는 이전 정보 => 덮어씌워줘
+        if form.is_valid():
+            form.save()
+            return redirect('articles:detail', id=id)
+        # form = ArticleForm()은 완전히 빈 종이를 만듦, 함수 안 내용은 기존 정보
+
+    else:
+        form = ArticleForm(instance=article)
+
+    context = {
+        'form': form,
+        }
+    return render(request, 'update.html', context)
