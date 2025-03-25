@@ -69,7 +69,8 @@ def comment_create(request, article_id):
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
-            comment = form.save(commit=False) # 기본값은 True, 저장하지말고 일단 대기해봐
+            comment = form.save(commit=False)
+            # 기본값은 True, 완전히 저장하지는 말고 일단 대기해봐, 데이터가 아직 하나 더 들어가야하니까
 
             article = Article.objects.get(id=article_id) ## 여기서부터
             comment.article = article
