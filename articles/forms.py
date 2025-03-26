@@ -1,11 +1,21 @@
 from django.forms import ModelForm
+from django import forms
 from .models import Article, Comment
 
 class ArticleForm(ModelForm):
+# 기능 완성 후 꾸며주기 위해 기존에 사용한 Article 모델의 title을 덮어씌워줌
+    title = forms.CharField(
+        widget=forms.TextInput(
+            attrs={'class': 'form-control'}
+        )
+    )
     class Meta():
         model = Article
         fields = '__all__'
         # input title, input content 대신 사용함
+        widgets = {
+            'content': forms.Textarea(attrs={'class': 'form-control'})
+        }
 
 
 # comment폼 만들기
